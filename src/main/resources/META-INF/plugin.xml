@@ -10,7 +10,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.whitegreen.intellijaissistant.toolWindow.MyToolWindowFactory"
-                    id="MyToolWindow"/>
+                    id="Aissistant"/>
     </extensions>
 
     <applicationListeners>

@@ -36,7 +36,7 @@ class MyToolWindowFactory : ToolWindowFactory {
 
     override fun shouldBeAvailable(project: Project) = true
 
-    class MyToolWindow(toolWindow: ToolWindow) : /*JBPanel<MyToolWindow>(),*/ AissistantToolWindow {
+    class MyToolWindow(toolWindow: ToolWindow) : AissistantToolWindow {
 
         private val project = toolWindow.project
         private val activateOnClick = object : MouseListener {
