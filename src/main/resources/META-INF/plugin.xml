@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.whitegreen.intellijaissistant</id>
-    <name>intellij-aissistant Template</name>
+    <name>Aissistant</name>
     <vendor>white-green</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -9,10 +9,45 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.whitegreen.intellijaissistant.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <toolWindow factoryClass="com.github.whitegreen.intellijaissistant.toolWindow.MyToolWindowFactory"
+                    id="MyToolWindow"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.whitegreen.intellijaissistant.listeners.MyFrameStateListener" topic="com.intellij.ide.FrameStateListener"/>
+        <listener class="com.github.whitegreen.intellijaissistant.listeners.MyAppLifecycleListener"
+                  topic="com.intellij.ide.AppLifecycleListener"/>
     </applicationListeners>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.AissistantCore"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantCoreImpl"/>
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.AissistantUI"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantUIImpl"/>
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.AissistantMicrophoneInput"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantMicrophoneInputService"/>
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.SpeechToText"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantSpeechToTextOpenAIWhisper"/>
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.ActiveResourceService"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.ActiveResourceServiceImpl"/>
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.AissistantRequestHandler"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantRequestHandlerOpenAI"/>
+        <applicationService
+                serviceInterface="com.github.whitegreen.intellijaissistant.services.AissistantResponseHandler"
+                serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantUIImpl"/>
+        <applicationService serviceImplementation="com.github.whitegreen.intellijaissistant.services.OpenAIToken"/>
+        <applicationService serviceImplementation="com.github.whitegreen.intellijaissistant.services.AissistantLLMSelect"/>
+        <applicationService serviceImplementation="com.github.whitegreen.intellijaissistant.settings.AissistantSettings"/>
+
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.whitegreen.intellijaissistant.settings.AppSettingsConfigurable"
+                id="com.github.whitegreen.intellijaissistant.settings.AppSettingsConfigurable"
+                displayName="Aissistant Plugin Settings"/>
+    </extensions>
 </idea-plugin>
